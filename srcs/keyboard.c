@@ -6,13 +6,13 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:28:53 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 01:17:19 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 01:58:12 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	ft_reset(t_fdf *env)
+static void	reset_value(t_fdf *env)
 {
 	env->camera->x_offset = 0;
 	env->camera->y_offset = 0;
@@ -33,7 +33,7 @@ static void	ft_reset(t_fdf *env)
 			HEIGHT / env->map->height / 2);
 }
 
-static void	ft_toggle_projection(t_fdf *env)
+static void	change_projection(t_fdf *env)
 {
 	if (env->camera->iso)
 	{
@@ -50,7 +50,7 @@ static void	ft_toggle_projection(t_fdf *env)
 	env->camera->iso = !env->camera->iso;
 }
 
-static void	ft_mod_height(int keycode, t_fdf *env)
+static void	height_control(int keycode, t_fdf *env)
 {
 	if (keycode == MINUS)
 		env->camera->z_height += 0.1;
@@ -62,7 +62,7 @@ static void	ft_mod_height(int keycode, t_fdf *env)
 		env->camera->z_height = 10;
 }
 
-static void	ft_translate(int keycode, t_fdf *env)
+static void	translate_control(int keycode, t_fdf *env)
 {
 	if (keycode == ARROW_LEFT)
 		env->camera->x_offset -= 10;
@@ -74,20 +74,20 @@ static void	ft_translate(int keycode, t_fdf *env)
 		env->camera->y_offset -= 10;
 }
 
-int	ft_key_press(int keycode, void *params)
+int	key_press_controls(int keycode, void *params)
 {
 	t_fdf	*env;
 
 	env = (t_fdf *)params;
 	if (keycode == ARROW_DOWN || keycode == ARROW_LEFT || keycode == ARROW_UP
 		|| keycode == ARROW_RIGHT)
-		ft_translate(keycode, env);
+		translate_control(keycode, env);
 	else if (keycode == MINUS || keycode == PLUS)
-		ft_mod_height(keycode, env);
+		height_control(keycode, env);
 	else if (keycode == SPACE)
-		ft_toggle_projection(env);
+		change_projection(env);
 	else if (keycode == KEY_R)
-		ft_reset(env);
+		reset_value(env);
 	else if (keycode == ESCAPE)
 		ft_close_win(env);
 	ft_draw(env->map, env);

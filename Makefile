@@ -19,6 +19,7 @@ MLX			=	libmlx.a
 MLXS		=	$(addprefix $(MLX_DIR)/, $(MLX))
 
 SRCS		=	fdf.c \
+				srcs/init.c \
 				srcs/alg_utils.c \
 				srcs/controls.c \
 				srcs/mouse.c \

@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:28:40 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/20 13:52:46 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 02:49:33 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_close_win(void *params)
 	int		y;
 
 	env = (t_fdf *)params;
+	printf("env->mlx ----- %p\n", env->mlx);
+	printf("env->img ----- %p\n", env->img);
 	mlx_destroy_image(env->mlx, env->img);
 	mlx_destroy_window(env->mlx, env->win);
 	free(env->camera);
@@ -38,9 +40,9 @@ int	ft_close_win(void *params)
 	exit(0);
 }
 
-void	ft_hook_controls(t_fdf *env)
+void	hook_controls(t_fdf *env)
 {
-	mlx_hook(env->win, 2, 0, ft_key_press, env);
+	mlx_hook(env->win, 2, 0, key_press_controls, env);
 	mlx_hook(env->win, 4, 0, ft_mouse_down, env);
 	mlx_hook(env->win, 5, 0, ft_mouse_up, env);
 	mlx_hook(env->win, 6, 0, ft_mouse_move, env);

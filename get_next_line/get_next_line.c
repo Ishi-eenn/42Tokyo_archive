@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:33:42 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/20 13:39:25 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 02:20:50 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*ft_malloc_size(char **line, char *buf)
 	buf_len = 0;
 	while (buf[buf_len] && buf[buf_len] != '\n')
 		buf_len++;
-	ret = (char *)malloc(sizeof(char) * (buf_len + line_len + 1));
+	ret = malloc(sizeof(char) * (buf_len + line_len + 1));
 	if (!ret)
 		return (NULL);
 	return (ret);
@@ -89,7 +89,7 @@ static int	ft_get_next_line(int fd, char **line)
 
 int	get_next_line(int fd, char **line)
 {
-	if (fd < 0 || fd > OPEN_MAX || !line || BUFFER_SIZE < 1)
+	if (fd < 0 || fd >= OPEN_MAX || !line || BUFFER_SIZE < 1)
 		return (-1);
 	return (ft_get_next_line(fd, line));
 }

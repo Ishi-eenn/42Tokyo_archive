@@ -11,7 +11,7 @@
 #include "mlx_new_window.h"
 
 
-
+#include <stdio.h>
 void    *mlx_new_image(mlx_ptr_t *mlx_ptr, int width, int height)
 {
   mlx_img_list_t        *newimg;
@@ -20,6 +20,7 @@ void    *mlx_new_image(mlx_ptr_t *mlx_ptr, int width, int height)
   //    return (NULL);  // need at leat one window created to have openGL context and create texture
   if ((newimg = malloc(sizeof(*newimg))) == NULL)
     return ((void *)0);
+  printf("%p\n", newimg);
   newimg->next = mlx_ptr->img_list;
   mlx_ptr->img_list = newimg;
   newimg->width = width;
@@ -29,6 +30,7 @@ void    *mlx_new_image(mlx_ptr_t *mlx_ptr, int width, int height)
   newimg->vertexes[4] = width;  newimg->vertexes[5] = -height;
   newimg->vertexes[6] = 0.0;  newimg->vertexes[7] = -height;
   newimg->buffer = malloc(UNIQ_BPP*width*height);
+  printf("buffer --- %p\n", newimg->buffer);
   bzero(newimg->buffer, UNIQ_BPP*width*height);
 
   return (newimg);
@@ -135,7 +137,7 @@ int mlx_string_put(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, int x, int y, in
     }
 
   win_ptr->nb_flush ++;
-  
+
   return (0);
 }
 
