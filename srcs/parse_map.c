@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:08 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 02:25:09 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 04:51:54 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	ft_fill_table(int **n, char *line, int width)
 	{
 		n[i] = malloc(sizeof(int) * 2);
 		if (!n[i])
-			ft_return_error("malloc error", 1);
+			ft_return_error(MALLOC_ERROR, 1);
 		n[i][0] = ft_atoi(num[i]);
 		j = 0;
 		while (num[i][j] && num[i][j] != ',')
@@ -85,7 +85,7 @@ static void	ft_fill_table(int **n, char *line, int width)
 		free(num[i]);
 	}
 	if (i != width || num[i])
-		ft_return_error("error: fdf file has irregular width", 0);
+		ft_return_error(MAP_ERROR, 0);
 	free(num);
 }
 
