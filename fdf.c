@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:25 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/20 15:39:39 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 01:17:19 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ static t_camera	*ft_camera_init(t_fdf *env)
 {
 	t_camera	*camera;
 
-	camera = (t_camera *)malloc(sizeof(t_camera));
+	camera = malloc(sizeof(t_camera));
 	if (!camera)
-		ft_return_error("error initializing camera", 1);
+		ft_return_error(MALLOC_ERROR, 1);
 	camera->zoom = ft_min(WIDTH / env->map->width / 2,
 			HEIGHT / env->map->height / 2);
-	camera->x_angle = -0.615472907;
-	camera->y_angle = -0.523599;
-	camera->z_angle = 0.615472907;
+	camera->x_angle = -0.6157;
+	camera->y_angle = -0.5299;
+	camera->z_angle = 0.6157;
 	camera->z_height = 1;
 	camera->x_offset = 0;
 	camera->y_offset = 0;

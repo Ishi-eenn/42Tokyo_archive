@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:28:53 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 01:01:35 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 01:17:19 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	ft_reset(t_fdf *env)
 	env->camera->y_offset = 0;
 	if (env->camera->iso)
 	{
-		env->camera->x_angle = -0.615472;
-		env->camera->y_angle = -0.523599;
-		env->camera->z_angle = 0.615472;
+		env->camera->x_angle = -0.6157;
+		env->camera->y_angle = -0.5299;
+		env->camera->z_angle = 0.6157;
 	}
 	else
 	{
@@ -43,9 +43,9 @@ static void	ft_toggle_projection(t_fdf *env)
 	}
 	else
 	{
-		env->camera->x_angle = -0.615472;
-		env->camera->y_angle = -0.523599;
-		env->camera->z_angle = 0.615472;
+		env->camera->x_angle = -0.6157;
+		env->camera->y_angle = -0.5299;
+		env->camera->z_angle = 0.6157;
 	}
 	env->camera->iso = !env->camera->iso;
 }
