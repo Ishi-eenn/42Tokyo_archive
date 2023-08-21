@@ -6,21 +6,19 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:28:40 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 02:49:33 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:59:12 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	ft_close_win(void *params)
+int	close_win(void *params)
 {
 	t_fdf	*env;
 	int		x;
 	int		y;
 
 	env = (t_fdf *)params;
-	printf("env->mlx ----- %p\n", env->mlx);
-	printf("env->img ----- %p\n", env->img);
 	mlx_destroy_image(env->mlx, env->img);
 	mlx_destroy_window(env->mlx, env->win);
 	free(env->camera);
@@ -43,13 +41,13 @@ int	ft_close_win(void *params)
 void	hook_controls(t_fdf *env)
 {
 	mlx_hook(env->win, 2, 0, key_press_controls, env);
-	mlx_hook(env->win, 4, 0, ft_mouse_down, env);
-	mlx_hook(env->win, 5, 0, ft_mouse_up, env);
-	mlx_hook(env->win, 6, 0, ft_mouse_move, env);
-	mlx_hook(env->win, 17, 0, ft_close_win, env);
+	mlx_hook(env->win, 4, 0, mouse_down, env);
+	mlx_hook(env->win, 5, 0, mouse_up, env);
+	mlx_hook(env->win, 6, 0, mouse_move, env);
+	mlx_hook(env->win, 17, 0, close_win, env);
 }
 
-double	ft_reset_angles(double angle)
+double	reset_angles(double angle)
 {
 	if (angle >= M_PI)
 		return (-2 * M_PI - angle);

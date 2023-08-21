@@ -6,13 +6,13 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:19 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 10:29:57 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:00:52 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_put_pixel(t_fdf *env, int x, int y, int color)
+void	put_pixel(t_fdf *env, int x, int y, int color)
 {
 	int		i;
 
@@ -25,7 +25,7 @@ void	ft_put_pixel(t_fdf *env, int x, int y, int color)
 	}
 }
 
-void	ft_get_z_min_max(t_map *map, int n)
+void	get_z_min_max(t_map *map, int n)
 {
 	if (n > map->z_max)
 		map->z_max = n;

@@ -6,13 +6,13 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:13 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/20 13:51:50 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 13:01:47 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	ft_rotate_x(int *y, int *z, double x_angle)
+static void	rotate_x(int *y, int *z, double x_angle)
 {
 	int	prev_y;
 
@@ -21,7 +21,7 @@ static void	ft_rotate_x(int *y, int *z, double x_angle)
 	*z = prev_y * -sin(x_angle) + *z * cos(x_angle);
 }
 
-static void	ft_rotate_y(int *x, int *z, double y_angle)
+static void	rotate_y(int *x, int *z, double y_angle)
 {
 	int	prev_x;
 
@@ -30,7 +30,7 @@ static void	ft_rotate_y(int *x, int *z, double y_angle)
 	*z = prev_x * -sin(y_angle) + *z * cos(y_angle);
 }
 
-static void	ft_rotate_z(int *x, int *y, double z_angle)
+static void	rotate_z(int *x, int *y, double z_angle)
 {
 	t_point	prev;
 
@@ -54,9 +54,9 @@ t_point	project(int x, int y, t_fdf *env)
 	point.z *= env->camera->zoom / env->camera->z_height;
 	point.x -= (env->map->width * env->camera->zoom) / 2;
 	point.y -= (env->map->height * env->camera->zoom) / 2;
-	ft_rotate_x(&point.y, &point.z, env->camera->x_angle);
-	ft_rotate_y(&point.x, &point.z, env->camera->y_angle);
-	ft_rotate_z(&point.x, &point.y, env->camera->z_angle);
+	rotate_x(&point.y, &point.z, env->camera->x_angle);
+	rotate_y(&point.x, &point.z, env->camera->y_angle);
+	rotate_z(&point.x, &point.y, env->camera->z_angle);
 	point.x += WIDTH / 2 + env->camera->x_offset;
 	point.y += (HEIGHT + env->map->height / 2 * env->camera->zoom) / 2
 		+ env->camera->y_offset;

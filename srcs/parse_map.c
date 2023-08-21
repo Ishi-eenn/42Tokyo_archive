@@ -6,13 +6,13 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:08 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 09:17:14 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:06:39 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	ft_get_height(char *filename)
+static int	get_height(char *filename)
 {
 	int		fd;
 	int		height;
@@ -33,7 +33,7 @@ static int	ft_get_height(char *filename)
 	return (height);
 }
 
-static int	ft_get_width(char *filename)
+static int	get_width(char *filename)
 {
 	int		fd;
 	int		width;
@@ -61,7 +61,7 @@ static int	ft_get_width(char *filename)
 	return (width);
 }
 
-static void	ft_fill_table(int **n, char *line, int width)
+static void	fill_table(int **n, char *line, int width)
 {
 	char	**num;
 	int		i;
@@ -89,7 +89,7 @@ static void	ft_fill_table(int **n, char *line, int width)
 	free(num);
 }
 
-static void	ft_get_z_min_max(t_map *map)
+static void	get_z_min_max(t_map *map)
 {
 	int	i;
 	int	j;
@@ -118,8 +118,8 @@ void	check_valid(char *filename, t_map *map)
 	char	*line;
 	int		i;
 
-	map->width = ft_get_width(filename);
-	map->height = ft_get_height(filename);
+	map->width = get_width(filename);
+	map->height = get_height(filename);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return_error(OPEN_ERROR, 1);
@@ -132,11 +132,11 @@ void	check_valid(char *filename, t_map *map)
 		map->array[++i] = malloc(sizeof(int *) * map->width);
 		if (!map->array[i])
 			return_error(MALLOC_ERROR, 1);
-		ft_fill_table(map->array[i], line, map->width);
+		fill_table(map->array[i], line, map->width);
 		free(line);
 	}
 	free(line);
-	ft_get_z_min_max(map);
+	get_z_min_max(map);
 	if (close(fd) == -1)
 		return_error(CLOSE_ERROR, 1);
 }
