@@ -6,20 +6,20 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:28:58 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 13:00:52 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 15:45:18 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static int	ft_lerp(int first, int second, double p)
+static int	lerp(int first, int second, double p)
 {
 	if (first == second)
 		return (first);
 	return ((int)((double)first + (second - first) * p));
 }
 
-static int	ft_get_color(int x, t_point s, t_point e, float factor)
+static int	get_color(int x, t_point s, t_point e, float factor)
 {
 	int		r;
 	int		g;
@@ -29,15 +29,15 @@ static int	ft_get_color(int x, t_point s, t_point e, float factor)
 	percent = ft_abs(x - s.x) / ft_abs(e.x - s.x);
 	if (s.reverse)
 	{
-		r = ft_lerp((e.color >> 16) & 0xFF, (s.color >> 16) & 0xFF, percent);
-		g = ft_lerp((e.color >> 8) & 0xFF, (s.color >> 8) & 0xFF, percent);
-		b = ft_lerp(e.color & 0xFF, s.color & 0xFF, percent);
+		r = lerp((e.color >> 16) & 0xFF, (s.color >> 16) & 0xFF, percent);
+		g = lerp((e.color >> 8) & 0xFF, (s.color >> 8) & 0xFF, percent);
+		b = lerp(e.color & 0xFF, s.color & 0xFF, percent);
 	}
 	else
 	{
-		r = ft_lerp((s.color >> 16) & 0xFF, (e.color >> 16) & 0xFF, percent);
-		g = ft_lerp((s.color >> 8) & 0xFF, (e.color >> 8) & 0xFF, percent);
-		b = ft_lerp(s.color & 0xFF, e.color & 0xFF, percent);
+		r = lerp((s.color >> 16) & 0xFF, (e.color >> 16) & 0xFF, percent);
+		g = lerp((s.color >> 8) & 0xFF, (e.color >> 8) & 0xFF, percent);
+		b = lerp(s.color & 0xFF, e.color & 0xFF, percent);
 	}
 	r *= factor;
 	g *= factor;
@@ -66,16 +66,16 @@ static void	draw_line_loop(t_point s, t_point e, float gradient, t_fdf *env)
 		if (env->steep)
 		{
 			put_pixel(env, ft_ipart(inter_y), x,
-				ft_get_color(x, s, e, ft_rfpart(inter_y)));
+				get_color(x, s, e, ft_rfpart(inter_y)));
 			put_pixel(env, ft_ipart(inter_y) + 1, x,
-				ft_get_color(x, s, e, ft_fpart(inter_y)));
+				get_color(x, s, e, ft_fpart(inter_y)));
 		}
 		else
 		{
 			put_pixel(env, x, ft_ipart(inter_y),
-				ft_get_color(x, s, e, ft_rfpart(inter_y)));
+				get_color(x, s, e, ft_rfpart(inter_y)));
 			put_pixel(env, x, ft_ipart(inter_y) + 1,
-				ft_get_color(x, s, e, ft_fpart(inter_y)));
+				get_color(x, s, e, ft_fpart(inter_y)));
 		}
 		inter_y += gradient;
 		x++;
