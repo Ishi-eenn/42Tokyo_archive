@@ -6,13 +6,13 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:28:46 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/20 16:22:23 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 09:17:29 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ft_draw(t_map *map, t_fdf *env)
+void	draw(t_map *map, t_fdf *env)
 {
 	int	x;
 	int	y;
@@ -29,9 +29,9 @@ void	ft_draw(t_map *map, t_fdf *env)
 		while (x < map->width && x >= 0)
 		{
 			if (x != map->width - 1)
-				ft_draw_line(project(x, y, env), project(x + 1, y, env), env);
+				draw_line(project(x, y, env), project(x + 1, y, env), env);
 			if (y != map->height - 1)
-				ft_draw_line(project(x, y, env), project(x, y + 1, env), env);
+				draw_line(project(x, y, env), project(x, y + 1, env), env);
 			x += -2 * (env->camera->y_angle > 0) + 1;
 		}
 		y += -2 * (env->camera->x_angle > 0) + 1;

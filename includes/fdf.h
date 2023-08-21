@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:33 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 01:26:17 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 09:17:29 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@
 
 // init
 t_fdf	*env_init(const char *path);
-t_camera	*ft_camera_init(t_fdf *env);
+t_camera	*camera_init(t_fdf *env);
 t_map	*ft_map_init(void);
 
-void	ft_check_valid(char *filename, t_map *map);
-void	ft_draw(t_map *map, t_fdf *env);
+void	check_valid(char *filename, t_map *map);
+void	draw(t_map *map, t_fdf *env);
 void	ft_put_pixel(t_fdf *env, int x, int y, int color);
-void	ft_draw_line(t_point s, t_point e, t_fdf *env);
+void	draw_line(t_point s, t_point e, t_fdf *env);
 t_point	project(int x, int y, t_fdf *env);
 int		ft_min(int a, int b);
 int		get_default_color(int z, t_map *map);
-void	ft_return_error(const char *err_msg, int system_function);
+void	return_error(const char *err_msg, int system_function);
 double	ft_reset_angles(double angle);
 
 float	ft_abs(float n);

@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:19 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 04:45:39 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 10:29:57 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_get_z_min_max(t_map *map, int n)
 		map->z_min = n;
 }
 
-void	ft_return_error(const char *err_msg, int system_function)
+void	return_error(const char *err_msg, int system_function)
 {
 	if (!system_function)
 		ft_putendl_fd((char *)err_msg, STDERR_FILENO);
@@ -55,17 +55,17 @@ int	get_default_color(int z, t_map *map)
 	unsigned int	max;
 
 	max = map->z_max - map->z_min;
-	// if (max == 0)
+	if (max == 0)
 		return (0x438bc3);
 	percent = ((double)(z - map->z_min) / max);
 	if (percent < 0.2)
 		return (0x438bc3);
-	// else if (percent < 0.4)
-	// 	return (0x70a6d1);
-	// else if (percent < 0.6)
-	// 	return (0x9cc2df);
-	// else if (percent < 0.8)
-	// 	return (0xc9deee);
-	// else
+	else if (percent < 0.4)
+		return (0x70a6d1);
+	else if (percent < 0.6)
+		return (0x9cc2df);
+	else if (percent < 0.8)
+		return (0xc9deee);
+	else
 		return (0xf6f9fc);
 }

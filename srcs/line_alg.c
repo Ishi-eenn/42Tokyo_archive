@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:28:58 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/20 13:52:21 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 09:17:29 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static void	ft_swap(int *a, int *b)
 	*b = tmp;
 }
 
-static void	ft_draw_line_loop(t_point s, t_point e, float gradient, t_fdf *env)
+static void	draw_line_loop(t_point s, t_point e, float gradient, t_fdf *env)
 {
 	float	inter_y;
 	int		x;
@@ -82,7 +82,7 @@ static void	ft_draw_line_loop(t_point s, t_point e, float gradient, t_fdf *env)
 	}
 }
 
-void	ft_draw_line(t_point s, t_point e, t_fdf *env)
+void	draw_line(t_point s, t_point e, t_fdf *env)
 {
 	float	dy;
 	float	dx;
@@ -105,5 +105,5 @@ void	ft_draw_line(t_point s, t_point e, t_fdf *env)
 	gradient = dy / dx;
 	if (dx == 0.0f)
 		gradient = 1.f;
-	ft_draw_line_loop(s, e, gradient, env);
+	draw_line_loop(s, e, gradient, env);
 }

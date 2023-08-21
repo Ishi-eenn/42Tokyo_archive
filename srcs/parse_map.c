@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:08 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 04:51:54 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 09:17:14 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	ft_get_height(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		ft_return_error(OPEN_ERROR, 1);
+		return_error(OPEN_ERROR, 1);
 	height = 0;
 	while (get_next_line(fd, &line) >= 0 && *line != '\0')
 	{
@@ -29,7 +29,7 @@ static int	ft_get_height(char *filename)
 	}
 	free(line);
 	if (close(fd) == -1)
-		ft_return_error(CLOSE_ERROR, 1);
+		return_error(CLOSE_ERROR, 1);
 	return (height);
 }
 
@@ -43,12 +43,12 @@ static int	ft_get_width(char *filename)
 	i = -1;
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		ft_return_error(OPEN_ERROR, 1);
+		return_error(OPEN_ERROR, 1);
 	width = 0;
 	if (get_next_line(fd, &line) == -1)
-		ft_return_error(MAP_ERROR, 0);
+		return_error(MAP_ERROR, 0);
 	if (*line == '\0')
-		ft_return_error(MAP_ERROR, 0);
+		return_error(MAP_ERROR, 0);
 	while (line[++i])
 		if (line[i] != ' ' && (line[i + 1] == ' ' || line[i + 1] == '\0'))
 			width++;
@@ -57,7 +57,7 @@ static int	ft_get_width(char *filename)
 		free(line);
 	free(line);
 	if (close(fd) == -1)
-		ft_return_error(CLOSE_ERROR, 1);
+		return_error(CLOSE_ERROR, 1);
 	return (width);
 }
 
@@ -73,7 +73,7 @@ static void	ft_fill_table(int **n, char *line, int width)
 	{
 		n[i] = malloc(sizeof(int) * 2);
 		if (!n[i])
-			ft_return_error(MALLOC_ERROR, 1);
+			return_error(MALLOC_ERROR, 1);
 		n[i][0] = ft_atoi(num[i]);
 		j = 0;
 		while (num[i][j] && num[i][j] != ',')
@@ -85,7 +85,7 @@ static void	ft_fill_table(int **n, char *line, int width)
 		free(num[i]);
 	}
 	if (i != width || num[i])
-		ft_return_error(MAP_ERROR, 0);
+		return_error(MAP_ERROR, 0);
 	free(num);
 }
 
@@ -112,7 +112,7 @@ static void	ft_get_z_min_max(t_map *map)
 	}
 }
 
-void	ft_check_valid(char *filename, t_map *map)
+void	check_valid(char *filename, t_map *map)
 {
 	int		fd;
 	char	*line;
@@ -122,21 +122,21 @@ void	ft_check_valid(char *filename, t_map *map)
 	map->height = ft_get_height(filename);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		ft_return_error(OPEN_ERROR, 1);
+		return_error(OPEN_ERROR, 1);
 	i = -1;
 	map->array = malloc(sizeof(int **) * map->height);
 	if (!map->array)
-		ft_return_error(MALLOC_ERROR, 1);
+		return_error(MALLOC_ERROR, 1);
 	while (get_next_line(fd, &line) >= 0 && *line != '\0')
 	{
 		map->array[++i] = malloc(sizeof(int *) * map->width);
 		if (!map->array[i])
-			ft_return_error(MALLOC_ERROR, 1);
+			return_error(MALLOC_ERROR, 1);
 		ft_fill_table(map->array[i], line, map->width);
 		free(line);
 	}
 	free(line);
 	ft_get_z_min_max(map);
 	if (close(fd) == -1)
-		ft_return_error(CLOSE_ERROR, 1);
+		return_error(CLOSE_ERROR, 1);
 }

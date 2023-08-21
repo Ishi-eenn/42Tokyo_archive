@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:28:53 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 01:58:12 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/21 09:17:29 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ int	key_press_controls(int keycode, void *params)
 		reset_value(env);
 	else if (keycode == ESCAPE)
 		ft_close_win(env);
-	ft_draw(env->map, env);
+	draw(env->map, env);
 	return (0);
 }
