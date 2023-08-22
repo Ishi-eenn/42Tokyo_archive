@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 01:20:29 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 09:17:14 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/22 17:07:51 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_fdf	*env_init(const char *path)
 	t_fdf	*env;
 	char	*title;
 
-	title = ft_strjoin("FdF - ", path);
+	title = ft_strjoin("FdF ", path);
 	env = malloc(sizeof(t_fdf));
 	if (!env)
 		return_error(MALLOC_ERROR, 1);
