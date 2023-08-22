@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:33 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/22 22:38:02 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/22 22:46:24 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	return_error(const char *err_msg, int system_function);
 double	reset_angles(double angle);
 
 float	ft_abs(float n);
-int		ft_ipart(float n);
+int		ft_ftoi(float n);
 float	ft_fpart(float n);
 float	ft_rfpart(float n);
 

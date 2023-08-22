@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:28:35 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/20 13:52:54 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/22 22:48:06 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ float	ft_abs(float n)
 	return (n);
 }
 
-int	ft_ipart(float n)
+int	ft_ftoi(float n)
 {
 	return ((int)n);
 }
@@ -27,8 +27,8 @@ int	ft_ipart(float n)
 float	ft_fpart(float n)
 {
 	if (n > 0.f)
-		return (n - ft_ipart(n));
-	return (n - (ft_ipart(n) + 1.f));
+		return (n - ft_ftoi(n));
+	return (n - (ft_ftoi(n) + 1.f));
 }
 
 float	ft_rfpart(float n)

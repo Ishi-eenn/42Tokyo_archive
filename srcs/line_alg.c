@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:28:58 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 15:45:18 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/23 05:50:41 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,16 @@ static void	draw_line_loop(t_point s, t_point e, float gradient, t_fdf *env)
 	{
 		if (env->steep)
 		{
-			put_pixel(env, ft_ipart(inter_y), x,
+			put_pixel(env, ft_ftoi(inter_y), x,
 				get_color(x, s, e, ft_rfpart(inter_y)));
-			put_pixel(env, ft_ipart(inter_y) + 1, x,
+			put_pixel(env, ft_ftoi(inter_y) + 1, x,
 				get_color(x, s, e, ft_fpart(inter_y)));
 		}
 		else
 		{
-			put_pixel(env, x, ft_ipart(inter_y),
+			put_pixel(env, x, ft_ftoi(inter_y),
 				get_color(x, s, e, ft_rfpart(inter_y)));
-			put_pixel(env, x, ft_ipart(inter_y) + 1,
+			put_pixel(env, x, ft_ftoi(inter_y) + 1,
 				get_color(x, s, e, ft_fpart(inter_y)));
 		}
 		inter_y += gradient;
