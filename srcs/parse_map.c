@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:08 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/22 17:11:38 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:03:31 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ static int	get_width(char *filename)
 	return (width);
 }
 
+static void	judge_map_max(int n)
+{
+	if (n > Z_MAX || n < -Z_MAX)
+		return_error(MAP_ERROR, 0);
+}
+
 static void	fill_table(int **n, char *line, int width)
 {
 	char	**num;
@@ -83,6 +89,7 @@ static void	fill_table(int **n, char *line, int width)
 		else
 			n[i][1] = -1;
 		free(num[i]);
+		judge_map_max(n[i][0]);
 	}
 	if (i != width || num[i])
 		return_error(MAP_ERROR, 0);

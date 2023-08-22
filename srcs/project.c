@@ -6,39 +6,11 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:13 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 13:01:47 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/22 22:25:28 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-static void	rotate_x(int *y, int *z, double x_angle)
-{
-	int	prev_y;
-
-	prev_y = *y;
-	*y = prev_y * cos(x_angle) + *z * sin(x_angle);
-	*z = prev_y * -sin(x_angle) + *z * cos(x_angle);
-}
-
-static void	rotate_y(int *x, int *z, double y_angle)
-{
-	int	prev_x;
-
-	prev_x = *x;
-	*x = prev_x * cos(y_angle) + *z * sin(y_angle);
-	*z = prev_x * -sin(y_angle) + *z * cos(y_angle);
-}
-
-static void	rotate_z(int *x, int *y, double z_angle)
-{
-	t_point	prev;
-
-	prev.x = *x;
-	prev.y = *y;
-	*x = prev.x * cos(z_angle) - prev.y * sin(z_angle);
-	*y = prev.x * sin(z_angle) + prev.y * cos(z_angle);
-}
 
 t_point	project(int x, int y, t_fdf *env)
 {
@@ -48,7 +20,7 @@ t_point	project(int x, int y, t_fdf *env)
 	if (env->map->array[y][x][1] >= 0)
 		point.color = env->map->array[y][x][1];
 	else
-		point.color = get_default_color(env->map->array[y][x][0], env->map);
+		point.color = set_default_color(env->map->array[y][x][0]);
 	point.x = x * env->camera->zoom;
 	point.y = y * env->camera->zoom;
 	point.z *= env->camera->zoom / env->camera->z_height;

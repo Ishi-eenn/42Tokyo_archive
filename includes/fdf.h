@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:33 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 13:00:52 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/22 22:24:31 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,17 @@
 
 # define WIDTH 1080
 # define HEIGHT 620
+# define Z_MAX 1000
 
 // init
 t_fdf	*env_init(const char *path);
 t_camera	*camera_init(t_fdf *env);
 t_map	*ft_map_init(void);
+
+// rotate
+void	rotate_x(int *y, int *z, double x_angle);
+void	rotate_y(int *x, int *z, double y_angle);
+void	rotate_z(int *x, int *y, double z_angle);
 
 void	check_valid(char *filename, t_map *map);
 void	draw(t_map *map, t_fdf *env);
@@ -40,7 +46,7 @@ void	put_pixel(t_fdf *env, int x, int y, int color);
 void	draw_line(t_point s, t_point e, t_fdf *env);
 t_point	project(int x, int y, t_fdf *env);
 int		ft_min(int a, int b);
-int		get_default_color(int z, t_map *map);
+int		set_default_color(int z);
 void	return_error(const char *err_msg, int system_function);
 double	reset_angles(double angle);
 

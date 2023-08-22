@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:19 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/21 13:00:52 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/22 22:20:53 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,11 @@ int	ft_min(int a, int b)
 	return (b);
 }
 
-int	get_default_color(int z, t_map *map)
+int	set_default_color(int z)
 {
-	double			percent;
-	unsigned int	max;
-
-	max = map->z_max - map->z_min;
-	if (max == 0)
-		return (0x438bc3);
-	percent = ((double)(z - map->z_min) / max);
-	if (percent < 0.2)
-		return (0x438bc3);
-	else if (percent < 0.4)
-		return (0x70a6d1);
-	else if (percent < 0.6)
-		return (0x9cc2df);
-	else if (percent < 0.8)
-		return (0xc9deee);
-	else
+	if (z == 0)
 		return (0xf6f9fc);
+	if (z > 0)
+		return (0x438bc3);
+	return (0x86505d);
 }
