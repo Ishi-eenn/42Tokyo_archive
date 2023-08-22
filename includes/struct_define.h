@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:54 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/22 17:32:59 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/22 22:31:09 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ typedef struct s_map
 	int	height;
 	int	width;
 	int	***array;
-	int	z_max;
-	int	z_min;
 }	t_map;
 
 typedef struct s_camera

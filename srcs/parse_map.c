@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:08 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/22 18:03:31 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/22 22:31:30 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,29 +96,6 @@ static void	fill_table(int **n, char *line, int width)
 	free(num);
 }
 
-static void	get_z_min_max(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	map->z_min = map->array[0][0][0];
-	map->z_max = map->array[0][0][0];
-	while (i < map->height)
-	{
-		j = 0;
-		while (j < map->width)
-		{
-			if (map->array[i][j][0] < map->z_min)
-				map->z_min = map->array[i][j][0];
-			if (map->array[i][j][0] > map->z_max)
-				map->z_max = map->array[i][j][0];
-			j++;
-		}
-		i++;
-	}
-}
-
 void	check_valid(char *filename, t_map *map)
 {
 	int		fd;
@@ -143,7 +120,6 @@ void	check_valid(char *filename, t_map *map)
 		free(line);
 	}
 	free(line);
-	get_z_min_max(map);
 	if (close(fd) == -1)
 		return_error(CLOSE_ERROR, 1);
 }

@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_define.h                                     :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 19:29:29 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/22 22:44:22 by tsishika         ###   ########.fr       */
+/*   Created: 2023/08/21 21:41:03 by tsishika          #+#    #+#             */
+/*   Updated: 2023/08/22 22:45:10 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_DEFINE_H
-# define COLOR_DEFINE_H
+#include "fdf.h"
 
-# define COLOR_MINUS 0x86505d
-# define COLOR_PLUS 0x438bc3
-# define COLOR_ZERO 0xf6f9fc
-
-#endif
+int	set_default_color(int z)
+{
+	if (z < 0)
+	return (COLOR_MINUS);
+	if (z > 0)
+		return (COLOR_PLUS);
+	return (COLOR_ZERO);
+}

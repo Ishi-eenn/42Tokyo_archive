@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 01:20:29 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/22 17:07:51 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/22 22:31:19 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,5 @@ t_map	*ft_map_init(void)
 	map->height = 0;
 	map->width = 0;
 	map->array = NULL;
-	map->z_max = 0;
-	map->z_min = 0;
 	return (map);
 }

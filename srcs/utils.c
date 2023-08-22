@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:19 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/22 22:20:53 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/22 22:42:03 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,6 @@ void	put_pixel(t_fdf *env, int x, int y, int color)
 	}
 }
 
-void	get_z_min_max(t_map *map, int n)
-{
-	if (n > map->z_max)
-		map->z_max = n;
-	if (n < map->z_min)
-		map->z_min = n;
-}
-
 void	return_error(const char *err_msg, int system_function)
 {
 	if (!system_function)
@@ -49,11 +41,3 @@ int	ft_min(int a, int b)
 	return (b);
 }
 
-int	set_default_color(int z)
-{
-	if (z == 0)
-		return (0xf6f9fc);
-	if (z > 0)
-		return (0x438bc3);
-	return (0x86505d);
-}

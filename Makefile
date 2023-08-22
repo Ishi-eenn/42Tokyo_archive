@@ -18,7 +18,7 @@ MLX_DIR		=	minilibx
 MLX			=	libmlx.a
 MLXS		=	$(addprefix $(MLX_DIR)/, $(MLX))
 
-SRCS		=	fdf.c srcs/init.c srcs/alg_utils.c srcs/controls.c \
+SRCS		=	fdf.c srcs/init.c srcs/alg_utils.c srcs/controls.c srcs/color.c \
 				srcs/rotate.c srcs/mouse.c srcs/keyboard.c srcs/draw.c \
 				srcs/line_alg.c srcs/project.c srcs/parse_map.c srcs/utils.c
 
