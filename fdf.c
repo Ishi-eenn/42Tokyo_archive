@@ -6,20 +6,22 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:25 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/23 09:53:42 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/23 10:59:39 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
-void judge_filename(char *str){
-	int len = ft_strlen(str) - 1;
-	int judge = ft_strncmp(&str[len - 3], ".fdf", 4);
-	// printf("%s\n", &str[len - 3]);
-	// printf("-----------%d-------------\n", judge);
-	if(judge != 0)
-		return_error("お前、Makefile入れただろ。", 0);
+void	judge_filename(char *str)
+{
+	int	len;
+	int	judge;
+
+	len = ft_strlen(str) - 1;
+	judge = ft_strncmp(&str[len - 3], ".fdf", 4);
+	if (judge != 0)
+		return_error(MAP_ERROR, 0);
 }
 
 int	main(int argc, char *argv[])

@@ -6,7 +6,7 @@
 /*   By: tsishika <tsishika@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:29:19 by tsishika          #+#    #+#             */
-/*   Updated: 2023/08/22 22:42:03 by tsishika         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:49:53 by tsishika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ int	ft_min(int a, int b)
 		return (a);
 	return (b);
 }
-
