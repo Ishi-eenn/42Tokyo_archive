@@ -7,13 +7,13 @@ Bureaucrat::Bureaucrat(const std::string &name, const unsigned int grade) : name
   grade_ = grade;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &b) : name_(b.getName()), grade_(b.getGrade()) {}
+Bureaucrat::Bureaucrat(const Bureaucrat &bureaucrat) : name_(bureaucrat.getName()), grade_(bureaucrat.getGrade()) {}
 
 Bureaucrat::~Bureaucrat() {}
 
-Bureaucrat &Bureaucrat::operator=(const Bureaucrat &b) {
-  if (this != &b)
-    grade_ = b.getGrade();
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &bureaucrat) {
+  if (this != &bureaucrat)
+    grade_ = bureaucrat.getGrade();
 
   return *this;
 }
