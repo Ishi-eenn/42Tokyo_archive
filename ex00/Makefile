@@ -1,36 +1,37 @@
-NAME		=	a.out
-CXX			=	c++
-INCLUDE	=	-I./includes
-FLAGS		=	-Wall -Wextra -Werror -std=c++98
-RM			=	rm -rf
+NAME			=	a.out
+CXX				=	c++
+INCLUDE		=	-I./includes
+FLAGS			= -Wall -Wextra -Werror -std=c++98 -pedantic
+DEPFLAGS	=	-MMD -MP
+RM				=	rm -rf
 
-SRC_DIR	=	srcs
-SRC			=	Bureaucrat.cpp \
-					main.cpp
+SRC_DIR		=	srcs
+SRC				=	Bureaucrat.cpp \
+						main.cpp
 
-SRCS		= $(addprefix $(SRC_DIR)/, $(SRC))
+SRCS			= $(addprefix $(SRC_DIR)/, $(SRC))
 
-OBJ_DIR	= objs
-OBJS		= $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+OBJ_DIR		= objs
+OBJS			= $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+DEPS			= $(OBJS:.o=.d)
 
 $(NAME): $(OBJS)
-	$(CXX) $(FLAGS) $(INCLUDE) $(SRCS) -o $(NAME)
+	$(CXX) $(FLAGS) $(INCLUDE) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@ mkdir -p $(@D)
-	$(CXX) $(FLAGS) $(INCLUDE) -o $@ -c $<
+	@ mkdir -p $(dir $@)
+	$(CXX) $(FLAGS) $(DEPFLAGS) $(INCLUDE) -o $@ -c $<
 
-all: $(NAME) $(OBJS)
-
-%.o: %.cpp
-	$(CXX) $(FLAGS) $(INCLUDE) -c $< -o $@
+all: $(NAME)
 
 clean:
-	rm -rf $(OBJ_DIR)
+	$(RM) $(OBJ_DIR)
 
 fclean: clean
-	rm -rf $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
+
+-include $(DEPS)
 
 .PHONY: all clean fclean re
