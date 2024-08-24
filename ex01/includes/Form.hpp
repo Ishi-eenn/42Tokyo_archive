@@ -1,5 +1,5 @@
-#ifndef EX01_FORM_HPP
-#define EX01_FORM_HPP
+#ifndef FORM_HPP
+#define FORM_HPP
 
 #include <ostream>
 #include <string>
