@@ -1,6 +1,5 @@
 #include "RobotomyRequestForm.hpp"
 #include "Bureaucrat.hpp"
-#include <cstdlib>
 #include <iostream>
 
 const std::string RobotomyRequestForm::kFormName = "Robotomy Request";
