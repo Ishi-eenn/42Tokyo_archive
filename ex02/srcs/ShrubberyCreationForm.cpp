@@ -27,7 +27,7 @@ const std::string &ShrubberyCreationForm::getTarget() const {
   return target_;
 }
 
-void ShrubberyCreationForm::WriteTreeToFile() const {
+void ShrubberyCreationForm::writeTreeToFile() const {
   const std::string filename = getTarget() + kFileSuffix;
   std::ofstream out_file(filename.c_str(), std::ios_base::out);
 
@@ -52,7 +52,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 void ShrubberyCreationForm::executeEachForm(Bureaucrat const &executor) const {
   std::cout << executor.getName() << ": " << getTarget();
   try {
-    WriteTreeToFile();
+    writeTreeToFile();
     std::cout <<  " => Success"  << std::endl;
   } catch (const std::exception &e) {
     std::cout <<  " => Fail"  << std::endl;

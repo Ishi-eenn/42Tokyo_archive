@@ -16,7 +16,7 @@ class ShrubberyCreationForm : public AForm {
 
     ShrubberyCreationForm();
     void executeEachForm(Bureaucrat const &bureaucrat) const;
-    void WriteTreeToFile() const;
+    void writeTreeToFile() const;
 
   public:
     explicit ShrubberyCreationForm(const std::string &target);
