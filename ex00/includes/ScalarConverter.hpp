@@ -15,9 +15,9 @@ class ScalarConverter {
     } ScalarType;
 
     ScalarConverter();
-    ScalarConverter(const ScalarConverter &c);
+    ScalarConverter(const ScalarConverter &scalarConverter);
     ~ScalarConverter();
-    ScalarConverter &operator=(const ScalarConverter &c);
+    ScalarConverter &operator=(const ScalarConverter &scalarConverter);
 
     static bool isCharLiteral(const std::string &str);
     static bool isValidIntegerFormat(const std::string &str);

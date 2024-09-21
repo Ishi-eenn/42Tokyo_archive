@@ -17,10 +17,13 @@ int main() {
 
   Data *before = &data;
 
-  std::uintptr_t tmp = Serializer::serialize(before);
-  Data *after = Serializer::deserialize(tmp);
-
-  test(before, after);
+  try {
+    std::uintptr_t tmp = Serializer::serialize(before);
+    Data *after = Serializer::deserialize(tmp);
+    test(before, after);
+  } catch (const std::exception &e) {
+    std::cerr << e.what() << std::endl;
+  }
 
   try {
     Serializer::serialize(NULL);
