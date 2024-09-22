@@ -21,7 +21,7 @@ Array<T>::Array(const unsigned int n) : size_(n) {
 template <typename T>
 Array<T>::Array(const Array &other) : size_(other.size_) {
   try {
-    array_ = DupArray(other);
+    array_ = dupArray(other);
   } catch (const std::bad_alloc& e) {
     throw std::runtime_error("Error: Memory allocation failed");
   }
@@ -45,13 +45,13 @@ Array<T> &Array<T>::operator=(const Array &other) {
 
 template <typename T>
 const T &Array<T>::operator[](const std::size_t index) const {
-  ThrowIfIndexOutOfRange(index);
+  throwIndexOutOfRange(index);
   return array_[index];
 }
 
 template <typename T>
 T &Array<T>::operator[](const std::size_t index) {
-  ThrowIfIndexOutOfRange(index);
+  throwIndexOutOfRange(index);
   return array_[index];
 }
 
@@ -61,7 +61,7 @@ unsigned int Array<T>::size() const {
 }
 
 template <typename T>
-T *Array<T>::DupArray(const Array &other) {
+T *Array<T>::dupArray(const Array &other) {
   T *tmp = NULL;
   try {
     tmp = new T[other.size_]();
@@ -74,7 +74,7 @@ T *Array<T>::DupArray(const Array &other) {
 }
 
 template <typename T>
-void Array<T>::ThrowIfIndexOutOfRange(const std::size_t index) const {
+void Array<T>::throwIndexOutOfRange(const std::size_t index) const {
   if (index >= size_)
     throw std::out_of_range("Error: out of bounds index");
 }

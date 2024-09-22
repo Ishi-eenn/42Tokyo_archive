@@ -18,8 +18,8 @@ class Array {
   private:
     T *array_;
     unsigned int size_;
-    T   *DupArray(const Array &other);
-    void ThrowIfIndexOutOfRange(const std::size_t index) const;
+    T   *dupArray(const Array &other);
+    void throwIndexOutOfRange(const std::size_t index) const;
 };
 
 #include "Array.tpp"
