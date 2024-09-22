@@ -156,18 +156,27 @@ void ScalarConverter::printIntegerRepresentation(const ScalarType type, const T 
 
 template <typename T>
 void ScalarConverter::printFloatRepresentation(const ScalarType type, const T &scalar) {
-  if (type == kScalarTypeInvalid || !isFloatRange(scalar))
+  if (type == kScalarTypeInvalid || !isFloatRange(scalar)) {
     std::cout << "float: impossible" << std::endl;
-  else
-    std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(scalar) << "f" << std::endl;
+  } else {
+    std::cout << "float: ";
+    if (scalar == static_cast<int>(scalar))
+      std::cout << std::fixed << std::setprecision(1);
+    std::cout << static_cast<float>(scalar) << "f" << std::endl;
+  }
+
 }
 
 template <typename T>
 void ScalarConverter::printDoubleRepresentation(const ScalarType type, const T &scalar) {
   if(type == kScalarTypeInvalid)
     std::cout << "double: impossible" << std::endl;
-  else
-    std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(scalar) << std::endl;
+  else {
+    std::cout << "double: ";
+    if (scalar == static_cast<int>(scalar))
+      std::cout << std::fixed << std::setprecision(1);
+    std::cout << static_cast<double>(scalar) << std::endl;
+  }
 }
 
 template <typename T>
