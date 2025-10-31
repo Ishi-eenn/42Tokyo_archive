@@ -8,7 +8,7 @@ RM			=	rm -rf
 
 SRC_DIR		=	srcs
 SRC			=	main.cpp \
-					PmergeMe.cpp
+				PmergeMe.cpp
 
 SRCS		= $(addprefix $(SRC_DIR)/, $(SRC))
 

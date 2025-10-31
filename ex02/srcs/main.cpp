@@ -1,5 +1,9 @@
 #include "PmergeMe.hpp"
 #include <sstream>
+#include <iostream>
+#include <ctime>
+#include <climits>
+#include <cctype>
 
 namespace Array {
 

@@ -6,17 +6,18 @@
 # include <string>
 # include <sstream>
 # include <iostream>
-# include <iomanip> //setw()
-# include <cmath> // pow()
+# include <iomanip>
+# include <cmath>
+#include <algorithm>
 
 class PmergeMe {
   public:
     typedef std::vector<int> vecContainer;
-    typedef std::pair<unsigned int, vecContainer::const_iterator> pairMainChain;
+    typedef std::pair<int, vecContainer::const_iterator> pairMainChain;
     typedef std::vector<pairMainChain> vecMainChain;
 
     typedef std::deque<int> deqContainer;
-    typedef std::pair<unsigned int, deqContainer::const_iterator> pairMainChainDeq;
+    typedef std::pair<int, deqContainer::const_iterator> pairMainChainDeq;
     typedef std::deque<pairMainChainDeq> deqMainChain;
 
 public:
@@ -122,7 +123,7 @@ private:
               if (iTarget < (chunkSize + (hasUnpairedGroup ? 1 : 0))) {
                   typename C::value_type targetVal = data[targetIndex];
 
-                  const typename MainChain::const_iterator insertPos =
+                  typename MainChain::iterator insertPos =
                       recursiveSearchInsertPos<MainChain>(
                           tmpMainChain.begin(),
                           (targetIndex + 1 < groupSize * chunkSize
@@ -130,15 +131,14 @@ private:
                                   tmpMainChain.begin(),
                                   tmpMainChain.end(),
                                   std::make_pair(
-                                      data[targetIndex + (groupSize / 2)],
-                                      static_cast<typename C::const_iterator>(
-                                          data.begin() + targetIndex + (groupSize / 2)))
+                                    data[targetIndex + (groupSize / 2)],
+                                    static_cast<typename C::const_iterator>(data.begin() + targetIndex + (groupSize / 2)))
                               )
                             : tmpMainChain.end()),
-                          std::make_pair(targetVal, data.begin() + targetIndex)
+                          std::make_pair(targetVal, static_cast<typename C::const_iterator>(data.begin() + targetIndex))
                       );
 
-                  tmpMainChain.insert(insertPos, std::make_pair(targetVal, data.begin() + targetIndex));
+                  tmpMainChain.insert(insertPos, std::make_pair(targetVal, static_cast<typename C::const_iterator>(data.begin() + targetIndex)));
               }
               --iTarget;
           }
@@ -204,9 +204,9 @@ private:
     return ((std::pow(2, number + 1) + std::pow(-1, number)) / 3);
   }
 
-  template <typename TMainChain>
-  const typename TMainChain::const_iterator recursiveSearchInsertPos(const typename TMainChain::const_iterator begin,
-    const typename TMainChain::const_iterator end, const typename TMainChain::value_type targetVal)
+    template <typename TMainChain>
+    typename TMainChain::iterator recursiveSearchInsertPos(typename TMainChain::iterator begin,
+    typename TMainChain::iterator end, const typename TMainChain::value_type& targetVal)
   {
     if (begin == end)
       return (begin);
@@ -225,17 +225,17 @@ private:
     else
     {
       ++compareCount;
-      const typename TMainChain::const_iterator middle = begin + ((end - begin) / 2);
+      typename TMainChain::iterator middle = begin + ((end - begin) / 2);
       # ifdef DEBUG
         std::cout << (*middle).first << " - " << targetVal.first << std::endl;
       # endif //DEBUG
-      if (targetVal < *middle)
-        return (recursiveSearchInsertPos<TMainChain>(begin, middle, targetVal));
+      if (targetVal.first < (*middle).first)
+        return recursiveSearchInsertPos<TMainChain>(begin, middle, targetVal);
       else
-        return (recursiveSearchInsertPos<TMainChain>(middle + 1, end, targetVal));
+        return recursiveSearchInsertPos<TMainChain>(middle + 1, end, targetVal);
     }
   }
 
 };
 
-# endif //PMERGEME_HPP
+# endif

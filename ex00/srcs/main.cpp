@@ -1,10 +1,12 @@
 #include "BitcoinExchange.hpp"
 #include <iostream>
 #include <fstream>
+#include <sstream>    // ← stringstream 用
+#include <stdexcept>  // ← invalid_argument 用
 
 void isValidArgCount(int argc) {
-  if(argc != 2)
-    throw std::invalid_argument("could not open file.");
+  if (argc != 2)
+    throw std::invalid_argument("usage: ./program <input.txt>");
 }
 
 bool isFileType(const std::string& filename, const std::string& extension) {
@@ -23,14 +25,17 @@ bool isTxtFile(const std::string& filename) {
   return isFileType(filename, txtExtension);
 }
 
-void isValidFileHeadLine(std::ifstream &file, std::string fileHeader) {
+void isValidFileHeadLine(std::ifstream &file, const std::string& fileHeader) {
   std::string head_line;
   std::getline(file, head_line);
-  if(file.eof())
+  if (file.eof())
     throw std::invalid_argument("empty file");
-  if(file.fail())
+  if (file.fail())
     throw std::invalid_argument("reading file");
-  if(head_line != fileHeader)
+  // CRLF 対策（Windows 改行で末尾に \r が残るケース）
+  if (!head_line.empty() && head_line[head_line.size() - 1] == '\r')
+    head_line.erase(head_line.size() - 1);
+  if (head_line != fileHeader)
     throw std::invalid_argument("invalid file header");
 }
 
@@ -44,33 +49,32 @@ void isValidTxtFileHeadLine(std::ifstream &file) {
   isValidFileHeadLine(file, txtfileHeader);
 }
 
-void checkAndOpenFile(std::ifstream &file, std::string filename) {
-  file.open(filename);
-  if(!file.is_open())
+void checkAndOpenFile(std::ifstream &file, const std::string& filename) {
+  file.open(filename.c_str()); // ← C++98 互換に c_str() を渡す
+  if (!file.is_open())
     throw std::invalid_argument(filename + " not found");
 }
 
 void checkCsvAndOpenFile(std::ifstream &file) {
   const std::string filename = "assets/data.csv";
-
   try {
-    if(!isCsvFile(filename))
+    if (!isCsvFile(filename))
       throw std::invalid_argument("invalid file extension");
     checkAndOpenFile(file, filename);
     isValidCsvFileHeadLine(file);
   } catch (std::exception &e) {
-    throw std::invalid_argument("\"" + filename + "\" " + e.what());
+    throw std::invalid_argument("\"" + filename + "\" " + std::string(e.what()));
   }
 }
 
-void checkTxtAndOpenFile(std::ifstream &file, std::string filename) {
+void checkTxtAndOpenFile(std::ifstream &file, const std::string& filename) {
   try {
-    if(!isTxtFile(filename))
+    if (!isTxtFile(filename))
       throw std::invalid_argument("invalid file extension");
     checkAndOpenFile(file, filename);
     isValidTxtFileHeadLine(file);
   } catch (std::exception &e) {
-    throw std::invalid_argument("\"" + filename + "\" " + e.what());
+    throw std::invalid_argument("\"" + filename + "\" " + std::string(e.what()));
   }
 }
 
@@ -80,7 +84,7 @@ double extractAmount(const std::string& line, unsigned int n) {
 
   std::string amountStr = line.substr(n);
   std::stringstream ss(amountStr);
-  double amount;
+  double amount; // ← ここにビルドログが混入していたのを修正
 
   if (!(ss >> amount) || !ss.eof())
     throw std::invalid_argument("bad input => " + line);
@@ -88,29 +92,29 @@ double extractAmount(const std::string& line, unsigned int n) {
   return amount;
 }
 
-void loadExchangeRates(BitcoinExchange &bitcoin, std::ifstream &dateFile){
+void loadExchangeRates(BitcoinExchange &bitcoin, std::ifstream &dateFile) {
   std::string line;
   while (std::getline(dateFile, line)) {
-    if(dateFile.fail())
+    if (dateFile.fail())
       throw std::invalid_argument("reading file");
 
-    std::string date = line.substr(0, 10);
-    double amount = extractAmount(line, 11);
+    std::string date = line.substr(0, 10);     // "YYYY-MM-DD"
+    double amount = extractAmount(line, 11);    // カンマの後ろから
     bitcoin.addExchangeRate(date, amount);
   }
 }
 
-void calculateAndDisplayExchangeRates(BitcoinExchange &bitcoin, std::ifstream &dateFile){
+void calculateAndDisplayExchangeRates(BitcoinExchange &bitcoin, std::ifstream &dateFile) {
   std::string line;
   while (std::getline(dateFile, line)) {
-    if(dateFile.fail())
+    if (dateFile.fail())
       throw std::invalid_argument("reading file");
 
     try {
-      std::string date = line.substr(0, 10);
-      double amount = extractAmount(line, 13);
+      std::string date = line.substr(0, 10);    // "YYYY-MM-DD"
+      double amount = extractAmount(line, 13);  // "date | value" の value 部分
       double rate = bitcoin.calculateExchangeRate(date, amount);
-      std::cout << date << " => " << amount << " = " <<  rate << std::endl;
+      std::cout << date << " => " << amount << " = " << rate << std::endl;
     } catch (std::exception &e) {
       std::cout << "Error: " << e.what() << std::endl;
     }
@@ -122,7 +126,7 @@ int main(int argc, char **argv) {
     isValidArgCount(argc);
 
     std::ifstream inputFile, dataFile;
-    checkTxtAndOpenFile(inputFile, argv[1]);
+    checkTxtAndOpenFile(inputFile, std::string(argv[1]));
     checkCsvAndOpenFile(dataFile);
 
     BitcoinExchange bitcoin;

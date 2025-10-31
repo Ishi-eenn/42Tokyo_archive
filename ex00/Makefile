@@ -1,20 +1,20 @@
-NAME			=	btc
-CXX				=	c++
+NAME		=	btc
+CXX			=	c++
 
 INCLUDE		=	-I./includes
-FLAGS			=	-std=c++98 -Wall -Wextra -Werror -pedantic
+FLAGS		=	-std=c++98 -Wall -Wextra -Werror -pedantic
 DEPFLAGS	=	-MMD -MP
-RM				=	rm -rf
+RM			=	rm -rf
 
 SRC_DIR		=	srcs
-SRC				=	BitcoinExchange.cpp \
-						main.cpp
+SRC			=	BitcoinExchange.cpp \
+				main.cpp
 
-SRCS			= $(addprefix $(SRC_DIR)/, $(SRC))
+SRCS		= $(addprefix $(SRC_DIR)/, $(SRC))
 
 OBJ_DIR		= objs
-OBJS			= $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
-DEPS			= $(OBJS:.o=.d)
+OBJS		= $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+DEPS		= $(OBJS:.o=.d)
 
 $(NAME): $(OBJS)
 	$(CXX) $(FLAGS) $(INCLUDE) $(OBJS) -o $(NAME)

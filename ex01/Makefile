@@ -48,3 +48,4 @@ test: all
 -include $(DEPS)
 
 .PHONY: all debug clean fclean re test
+t: all
