@@ -10,7 +10,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./web:/var/www/html
+      - web:/var/www/html
     networks:
       - inception
     env_file:
@@ -18,6 +18,7 @@ services:
     secrets:
       - ssl_crt
       - ssl_key
+    restart: on-failure
 
   wordpress:
     build: requirements/wordpress/.
@@ -25,7 +26,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - ./web:/var/www/html
+      - web:/var/www/html
     networks:
       - inception
     env_file:
@@ -34,6 +35,7 @@ services:
       - db_user_password
       - wp_user_password
       - wp_admin_password
+    restart: on-failure
 
   mariadb:
     build: requirements/mariadb/.
@@ -47,6 +49,7 @@ services:
     secrets:
       - db_user_password
       - db_admin_password
+    restart: on-failure
 
 networks:
   inception:
@@ -57,6 +60,13 @@ volumes:
     driver_opts:
       type: none
       device: /home/${USER}/data/database
+      o: bind
+
+  web:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/${USER}/data/web
       o: bind
 
 secrets:
