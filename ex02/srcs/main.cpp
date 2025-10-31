@@ -202,7 +202,6 @@ namespace validate {
 }
 
 int main(int argc, char** argv) {
-
   try {
     validate::check::arguments(argc, argv);
 
@@ -226,9 +225,7 @@ int main(int argc, char** argv) {
     data.mergeInsertionSort(data.getContainerDeque(), 1, data.getContainerDeque().size(), false);
     double deqDuration = watch.stop();
     timer::showDeque(data.getContainerDeque().size(), deqDuration);
-
-  }
-  catch (const std::exception& e) {
+  } catch (const std::exception& e) {
     std::cout << e.what() << std::endl;
     return 1;
   }

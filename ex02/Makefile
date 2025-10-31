@@ -20,6 +20,10 @@ ifeq ($(MAKECMDGOALS), debug)
 	FLAGS += -DDEBUG
 endif
 
+ifeq ($(MAKECMDGOALS), vs)
+	FLAGS += -DVS
+endif
+
 $(NAME): $(OBJS)
 	$(CXX) $(FLAGS) $(INCLUDE) $(OBJS) -o $(NAME)
 
@@ -31,6 +35,8 @@ all: $(NAME)
 
 debug: re
 
+vs: re
+
 clean:
 	$(RM) $(OBJ_DIR)
 
@@ -41,4 +47,4 @@ re: fclean all
 
 -include $(DEPS)
 
-.PHONY: all debug clean fclean re
+.PHONY: all debug vs clean fclean re

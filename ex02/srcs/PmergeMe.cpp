@@ -38,23 +38,23 @@ const PmergeMe::deqContainer& PmergeMe::getContainerDeque() const {
 }
 
 void PmergeMe::integrateToMainChain(vecContainer& data,
-    vecContainer::size_type groupSize,
-    vecContainer::size_type chunkSize,
-    bool hasUnpairedGroup)
+  vecContainer::size_type groupSize,
+  vecContainer::size_type chunkSize,
+  bool hasUnpairedGroup)
 {
-    vecMainChain tmp = makeTempMainChain(data, groupSize);
-    integrateToMainChainImpl(data, groupSize, chunkSize, hasUnpairedGroup, tmp);
-    data = buildContainerFromMainchain(data, groupSize / 2, tmp);
+  vecMainChain tmp = makeTempMainChain(data, groupSize);
+  integrateToMainChainImpl(data, groupSize, chunkSize, hasUnpairedGroup, tmp);
+  data = buildContainerFromMainchain(data, groupSize / 2, tmp);
 }
 
 void PmergeMe::integrateToMainChain(deqContainer& data,
-    deqContainer::size_type groupSize,
-    deqContainer::size_type chunkSize,
-    bool hasUnpairedGroup)
+  deqContainer::size_type groupSize,
+  deqContainer::size_type chunkSize,
+  bool hasUnpairedGroup)
 {
-    deqMainChain tmp = makeTempMainChain(data, groupSize);
-    integrateToMainChainImpl(data, groupSize, chunkSize, hasUnpairedGroup, tmp);
-    data = buildContainerFromMainchain(data, groupSize / 2, tmp);
+  deqMainChain tmp = makeTempMainChain(data, groupSize);
+  integrateToMainChainImpl(data, groupSize, chunkSize, hasUnpairedGroup, tmp);
+  data = buildContainerFromMainchain(data, groupSize / 2, tmp);
 }
 
 PmergeMe::vecMainChain PmergeMe::makeTempMainChain(const vecContainer& data, const vecContainer::size_type groupSize) {
@@ -78,8 +78,8 @@ PmergeMe::deqMainChain PmergeMe::makeTempMainChain(const deqContainer& data, con
 }
 
 PmergeMe::vecContainer PmergeMe::buildContainerFromMainchain(const vecContainer& data,
-  const vecContainer::size_type& groupSize, const vecMainChain& mainChain)
-{
+  const vecContainer::size_type& groupSize, const vecMainChain& mainChain) {
+
   vecContainer	reconstructData;
   unsigned int remainData = data.size() % groupSize;
 
@@ -92,8 +92,7 @@ PmergeMe::vecContainer PmergeMe::buildContainerFromMainchain(const vecContainer&
 }
 
 PmergeMe::deqContainer PmergeMe::buildContainerFromMainchain(const deqContainer& data,
-  const deqContainer::size_type& groupSize, const deqMainChain& mainChain)
-{
+  const deqContainer::size_type& groupSize, const deqMainChain& mainChain) {
   deqContainer	reconstructData;
   unsigned int remainData = data.size() % groupSize;
 
