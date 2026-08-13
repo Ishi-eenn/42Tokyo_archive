@@ -1,0 +1,7 @@
+.DS_STORE
+.vscode
+
+tetris_base.tgz
+tetris
+*.o
+objs
