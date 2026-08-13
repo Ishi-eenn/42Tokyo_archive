@@ -1,0 +1,12 @@
+cmp
+out
+obj
+*.o
+minishell
+echo
+pwd
+a.out
+.DS_STORE
+.vscode
+sample.c
+ls
