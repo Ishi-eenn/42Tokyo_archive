@@ -9,3 +9,4 @@
 - push_swap
 - Pipex
 - FDF
+- minishell
