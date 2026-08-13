@@ -1,6 +1,6 @@
 # 42Tokyo
 
-42Tokyoの課題をまとめたモノレポ。
+42Tokyoで行ってきた課題のまとめ
 
 - [Libft](./Libft)
 - [get_next_line](./get_next_line)
