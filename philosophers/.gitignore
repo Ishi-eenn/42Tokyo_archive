@@ -1,0 +1,7 @@
+.vscode
+.DS_STORE
+*.o
+a.out
+objs
+log
+Philosophers-tester
