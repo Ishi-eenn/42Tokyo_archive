@@ -1,0 +1,8 @@
+.vscode
+.DS_Store
+
+cub3D
+objs
+mlx/*.o
+mlx/libmlx.a
+imgs
